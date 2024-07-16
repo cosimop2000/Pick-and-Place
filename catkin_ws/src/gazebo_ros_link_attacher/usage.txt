@@ -1,0 +1,16 @@
+The gazebo_ros_link_attacher plugin is particularly useful for 
+simulating grasping tasks in robotics. 
+It allows you to dynamically attach objects to the end effector of
+ a robot when picking them up and detach them when placing them down.
+
+
+--> roslaunch gazebo_ros_link_attacher test_attacher.launch
+(or gazebo simulation already activated)
+
+--> rosrun gazebo_ros_link_attacher spawn_objects.py
+
+--> rosrun gazebo_ros_link_attacher my_attach.py
+
+move objects with manipulator
+
+--> rosrun gazebo_ros_link_attacher my_detach.py

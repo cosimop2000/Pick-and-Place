@@ -49,6 +49,15 @@ MODELS_INFO = {
     },
     "X2-Y2-Z2-FILLET": {
         "home": [0.442505, -0.727271, 0.777] 
+    },
+    "cylinder": {
+        "home": [-0.5, -0.60, 0.877] 
+    },
+    "cube": {
+        "home": [-0.55, -0.50, 0.83]
+    },
+    "sphere": {
+        "home": [-0.45, -0.50, 0.83]
     }
 }
 
@@ -117,15 +126,20 @@ def get_legos_pos(vision=False):
         legos = rospy.wait_for_message("/lego_detections", ModelStates, timeout=None)
     else:
         models = rospy.wait_for_message("/gazebo/model_states", ModelStates, timeout=None)
+        print(models)
         legos = ModelStates()
+        print(legos)
 
         for name, pose in zip(models.name, models.pose):
+            """
             if "X" not in name:
                 continue
-            name = get_model_name(name)
+            """
+            if ("sphere" == name) or ("cube" == name) or ("cylinder" == name):
+                name = get_model_name(name)
 
-            legos.name.append(name)
-            legos.pose.append(pose)
+                legos.name.append(name)
+                legos.pose.append(pose)
     return [(lego_name, lego_pose) for lego_name, lego_pose in zip(legos.name, legos.pose)]
 
 
@@ -133,6 +147,11 @@ def straighten(model_pose, gazebo_model_name):
     x = model_pose.position.x
     y = model_pose.position.y
     z = model_pose.position.z
+
+    print("straighten method")
+
+    print(x, y, z)
+
     model_quat = PyQuaternion(
         x=model_pose.orientation.x,
         y=model_pose.orientation.y,
@@ -198,14 +217,20 @@ def straighten(model_pose, gazebo_model_name):
     """
     if facing_direction == (0, 0, 1) or facing_direction == (0, 0, -1):
         closure = model_size[0]
-        z = SURFACE_Z + model_size[2] / 2
+        z = SURFACE_Z + model_size[2] / 2 + 0.005
     elif facing_direction == (1, 0, 0):
         closure = model_size[1]
         z = SURFACE_Z + model_size[0] / 2
     elif facing_direction == (0, 1, 0):
         closure = model_size[0]
         z = SURFACE_Z + model_size[1] / 2
+    
+    print(x, y, z)
+    
     controller.move_to(z=z, target_quat=approach_quat)
+    
+    print("closing_gripper")
+    
     close_gripper(gazebo_model_name, closure)
 
     """
@@ -363,12 +388,16 @@ if __name__ == "__main__":
     controller.move_to(*DEFAULT_POS, DEFAULT_QUAT)
 
     print("Waiting for detection of the models")
-    rospy.sleep(0.5)
-    legos = get_legos_pos(vision=True)
+    rospy.sleep(0.2)
+    legos = get_legos_pos(vision=False)
+    print(legos)
     legos.sort(reverse=True, key=lambda a: (a[1].position.x, a[1].position.y))
 
     for model_name, model_pose in legos:
         open_gripper()
+
+        #rospy.sleep(1)
+
         try:
             model_home = MODELS_INFO[model_name]["home"]
             model_size = MODELS_INFO[model_name]["size"]
@@ -378,6 +407,8 @@ if __name__ == "__main__":
 
         # Get actual model_name at model xyz coordinates
         try:
+            #print(model_name)
+            #print(model_pose)
             gazebo_model_name = get_gazebo_model_name(model_name, model_pose)
         except ValueError as e:
             print(e)
@@ -391,19 +422,36 @@ if __name__ == "__main__":
             Go to destination
         """
         x, y, z = model_home
-        z += model_size[2] / 2 +0.004
+
+        print(x, y, z)
+
+        z += model_size[2] / 2 #+ 0.002
+        #print(model_size)
+        print(x, y, z)
+
         print(f"Moving model {model_name} to {x} {y} {z}")
+
+        rospy.sleep(0.5)
 
         controller.move_to(x, y, target_quat=DEFAULT_QUAT * PyQuaternion(axis=[0, 0, 1], angle=math.pi / 2))
         # Lower the object and release
-        controller.move_to(x, y, z)
-        set_model_fixed(gazebo_model_name)
+        controller.move_to(-x, y, z)
+        #set_model_fixed(gazebo_model_name)
         open_gripper(gazebo_model_name)
+        
+        #rospy.sleep(1)
+
         controller.move(dz=0.15)
 
-        if controller.gripper_pose[0][1] > -0.3 and controller.gripper_pose[0][0] > 0:
-            controller.move_to(*DEFAULT_POS, DEFAULT_QUAT)
+        #if controller.gripper_pose[0][1] > -0.3 and controller.gripper_pose[0][0] > 0:
+        #    controller.move_to(*DEFAULT_POS, DEFAULT_QUAT)
 
+        controller.move_to(*DEFAULT_POS, DEFAULT_QUAT)
+        
+        set_model_fixed(gazebo_model_name)
+        
+        rospy.sleep(0.5)
+        
         # increment z in order to stack lego correctly
         MODELS_INFO[model_name]["home"][2] += model_size[2] - INTERLOCKING_OFFSET
     print("Moving to Default Position")

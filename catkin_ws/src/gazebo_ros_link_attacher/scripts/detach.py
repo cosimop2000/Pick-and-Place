@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import sys
 import rospy
 from gazebo_ros_link_attacher.srv import Attach, AttachRequest, AttachResponse
@@ -6,6 +6,7 @@ from gazebo_ros_link_attacher.srv import Attach, AttachRequest, AttachResponse
 class_to_attach=""
 if len(sys.argv) != 1:
     class_to_attach=sys.argv[1]
+    print(class_to_attach)
 else:
     class_to_attach='lego_X1-Y2-Z2-CHAMFER'
 if __name__ == '__main__':

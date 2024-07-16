@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="blue_cylinder">
+    <static>false</static> <!-- Set to true to fix position, subject to gravity -->
+    
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.02</radius> <!-- Radius of the cylinder -->
+            <length>0.1</length> <!-- Height of the cylinder -->
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.02</radius> <!-- Radius of the cylinder -->
+            <length>0.1</length> <!-- Height of the cylinder -->
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Blue</name> <!-- Use the correct material name for black -->
+          </script>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Set mass and inertia for the cylinder -->
+    <inertial>
+      <mass>0.1</mass>
+      <inertia>
+        <ixx>0.00005</ixx>
+        <iyy>0.00005</iyy>
+        <izz>0.0001</izz>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyz>0</iyz>
+      </inertia>
+    </inertial>
+  </model>
+</sdf>

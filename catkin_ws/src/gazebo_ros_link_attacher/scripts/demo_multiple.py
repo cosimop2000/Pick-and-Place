@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rospy
-from gazebo_ros_link_attacher.msg import Attach
+from gazebo_ros_link_attacher.srv import Attach
 from gazebo_msgs.srv import SpawnModel, SpawnModelRequest, SpawnModelResponse
 from copy import deepcopy
 from tf.transformations import quaternion_from_euler

@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="red_cube">
+    <static>false</static> <!-- Set to true to fix position, subject to gravity -->
+    
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.04 0.04 0.04</size> <!-- Dimensions of the cube (x, y, z) -->
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.04 0.04 0.04</size> <!-- Dimensions of the cube (x, y, z) -->
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Red</name> <!-- Use the correct material name for black -->
+          </script>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Set mass and inertia for the cube -->
+    <inertial>
+      <mass>0.1</mass>
+      <inertia>
+        <ixx>0.0001</ixx>
+        <iyy>0.0001</iyy>
+        <izz>0.0001</izz>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyz>0</iyz>
+      </inertia>
+    </inertial>
+  </model>
+</sdf>

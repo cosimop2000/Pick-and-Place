@@ -1,0 +1,156 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="open_box">
+    <static>false</static> <!-- Ensure the model is not static to enable physics -->
+    
+    <!-- Base of the open box -->
+    <link name="base">
+      <pose>0 0 0 0 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.4 0.4 0.02</size> <!-- Width, depth, height of base -->
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.4 0.4 0.02</size> <!-- Width, depth, height of base -->
+          </box>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </geometry>
+      </visual>
+    </link>
+
+    <!-- Walls of the open box -->
+    <link name="wall_1">
+      <pose>0.2 0 0.01 0 0 0</pose> <!-- Adjust position relative to base -->
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.02 0.4 0.1</size> <!-- Width, depth, height of walls -->
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.02 0.4 0.1</size> <!-- Width, depth, height of walls -->
+          </box>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="wall_2">
+      <pose>-0.2 0 0.01 0 0 0</pose> <!-- Adjust position relative to base -->
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.02 0.4 0.1</size> <!-- Width, depth, height of walls -->
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.02 0.4 0.1</size> <!-- Width, depth, height of walls -->
+          </box>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="wall_3">
+      <pose>0 0.2 0.01 0 0 1.5708</pose> <!-- Adjust position relative to base and rotation -->
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.02 0.4 0.1</size> <!-- Width, depth, height of walls -->
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.02 0.4 0.1</size> <!-- Width, depth, height of walls -->
+          </box>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="wall_4">
+      <pose>0 -0.2 0.01 0 0 -1.5708</pose> <!-- Adjust position relative to base and rotation -->
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.02 0.4 0.1</size> <!-- Width, depth, height of walls -->
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.02 0.4 0.1</size> <!-- Width, depth, height of walls -->
+          </box>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </geometry>
+      </visual>
+    </link>
+
+    <!-- Fixed joints between the base and walls -->
+    <joint name="joint_wall_1" type="fixed">
+      <parent>base</parent>
+      <child>wall_1</child>
+      <pose>0.2 0 0 0 0 0</pose> <!-- Adjust pose if necessary -->
+    </joint>
+
+    <joint name="joint_wall_2" type="fixed">
+      <parent>base</parent>
+      <child>wall_2</child>
+      <pose>-0.2 0 0 0 0 0</pose> <!-- Adjust pose if necessary -->
+    </joint>
+
+    <joint name="joint_wall_3" type="fixed">
+      <parent>base</parent>
+      <child>wall_3</child>
+      <pose>0 0.2 0 0 0 1.5708</pose> <!-- Adjust pose if necessary -->
+    </joint>
+
+    <joint name="joint_wall_4" type="fixed">
+      <parent>base</parent>
+      <child>wall_4</child>
+      <pose>0 -0.2 0 0 0 -1.5708</pose> <!-- Adjust pose if necessary -->
+    </joint>
+
+    <!-- Set mass and inertia for the open box -->
+    <inertial>
+      <mass>1.0</mass>
+      <inertia>
+        <ixx>0.001333</ixx>
+        <iyy>0.001333</iyy>
+        <izz>0.002666</izz>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyz>0</iyz>
+      </inertia>
+    </inertial>
+  </model>
+</sdf>
