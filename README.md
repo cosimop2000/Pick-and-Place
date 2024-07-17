@@ -71,7 +71,7 @@ git clone https://github.com/ultralytics/yolov5
 cd yolov5
 pip3 install -r requirements.txt
 ```
-### Usage
+### Example
 
 Launch the world
 ```
@@ -99,3 +99,26 @@ rosrun vision vision.py -show
 | Leonardo Collizzolli | https://github.com/leocolliz         |
 | Pietro Lechthaler    | https://github.com/pietrolechthaler  |
 | Stefano Rizzi        | https://github.com/StefanoRizzi      |
+
+
+### Usage
+
+On different terminals
+
+--> to spawn the world
+```
+source devel/setup.bash
+roslaunch levelManager box_objects.launch
+```
+
+--> to spawn the objects (unpause gazebo)
+```
+source devel/setup.bash
+rosrun levelManager my_manager.py
+```
+
+--> to perform pick and place
+```
+source devel/setup.bash
+rosrun motion_planning motion_planning.py
+```
