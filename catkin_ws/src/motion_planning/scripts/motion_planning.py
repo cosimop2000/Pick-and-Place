@@ -51,10 +51,16 @@ MODELS_INFO = {
         "home": [0.442505, -0.727271, 0.777] 
     },
     "cylinder": {
-        "home": [-0.5, -0.60, 0.877] 
+        "home": [-0.5, -0.60, 0.83] 
     },
     "cube": {
-        "home": [-0.55, -0.50, 0.83]
+        "home": [0, -0.50, 0.83]
+    },
+    "cube_1": {
+        "home": [0.45, -0.50, 0.83]
+    },
+    "cube_2": {
+        "home": [0.55, -0.50, 0.83]
     },
     "sphere": {
         "home": [-0.45, -0.50, 0.83]
@@ -83,6 +89,7 @@ for model, info in MODELS_INFO.items():
     #print(f"{model}: {size_x:.3f} x {size_y:.3f} x {size_z:.3f}")
 
     MODELS_INFO[model]["size"] = (size_x, size_y, size_z)
+    print(MODELS_INFO[model]["size"])
 
 # Compensate for the interlocking height
 INTERLOCKING_OFFSET = 0.019
@@ -135,7 +142,7 @@ def get_legos_pos(vision=False):
             if "X" not in name:
                 continue
             """
-            if ("sphere" == name) or ("cube" == name) or ("cylinder" == name):
+            if ("sphere" == name) or ("cube" in name) or ("cylinder" == name):
                 name = get_model_name(name)
 
                 legos.name.append(name)
@@ -390,8 +397,11 @@ if __name__ == "__main__":
     print("Waiting for detection of the models")
     rospy.sleep(0.2)
     legos = get_legos_pos(vision=False)
+    #legos = get_legos_pos(vision=True)
     print(legos)
     legos.sort(reverse=True, key=lambda a: (a[1].position.x, a[1].position.y))
+
+    tmp = 0.001
 
     for model_name, model_pose in legos:
         open_gripper()
@@ -435,7 +445,8 @@ if __name__ == "__main__":
 
         controller.move_to(x, y, target_quat=DEFAULT_QUAT * PyQuaternion(axis=[0, 0, 1], angle=math.pi / 2))
         # Lower the object and release
-        controller.move_to(-x, y, z)
+        controller.move_to(0, -0.5 - tmp, 0.8)
+        tmp = tmp + 0.0401
         #set_model_fixed(gazebo_model_name)
         open_gripper(gazebo_model_name)
         

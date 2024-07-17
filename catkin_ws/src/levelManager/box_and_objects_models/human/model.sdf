@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="human_model">
+    <!-- Include the standard Gazebo human model -->
+    <include>
+      <uri>model://human</uri>
+    </include>
+    
+    <!-- Set initial pose of the model -->
+    <pose>0 -1.5 1 0 0 0</pose>
+  </model>
+</sdf>

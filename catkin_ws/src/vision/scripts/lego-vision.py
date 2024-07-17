@@ -2,7 +2,7 @@
 
 import cv2 as cv
 import numpy as np
-import torch
+#import torch
 import message_filters
 import rospy
 import sys
@@ -28,7 +28,7 @@ origin = None
 model = None
 model_orientation = None
 
-legoClasses = ['X1-Y1-Z2', 'X1-Y2-Z1', 'X1-Y2-Z2', 'X1-Y2-Z2-CHAMFER', 'X1-Y2-Z2-TWINFILLET', 'X1-Y3-Z2', 'X1-Y3-Z2-FILLET', 'X1-Y4-Z1', 'X1-Y4-Z2', 'X2-Y2-Z2', 'X2-Y2-Z2-FILLET']
+legoClasses = ['X1-Y1-Z2', 'lego_cube', 'lego_cylinder', 'lego_cube', 'X1-Y2-Z1', 'X1-Y2-Z2', 'X1-Y2-Z2-CHAMFER', 'X1-Y2-Z2-TWINFILLET', 'X1-Y3-Z2', 'X1-Y3-Z2-FILLET', 'X1-Y4-Z1', 'X1-Y4-Z2', 'X2-Y2-Z2', 'X2-Y2-Z2-FILLET']
 
 argv = sys.argv
 a_show = '-show' in argv
@@ -462,17 +462,17 @@ def load_models():
     #yolo model and weights classification
     print("Loading model best.pt")
     weight = path.join(path_weigths, 'best.pt')
-    model = torch.hub.load(path_yolo,'custom',path=weight, source='local')
+    #model = torch.hub.load(path_yolo,'custom',path=weight, source='local')
 
     #yolo model and weights orientation
     print("Loading model orientation.pt")
     weight = path.join(path_weigths, 'depth.pt')
-    model_orientation = torch.hub.load(path_yolo,'custom',path=weight, source='local')
+    #model_orientation = torch.hub.load(path_yolo,'custom',path=weight, source='local')
     pass
 
 if __name__ == '__main__':
 
-    load_models()
+    #load_models()
     try:
         start_node()
     except rospy.ROSInterruptException:
