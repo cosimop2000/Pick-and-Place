@@ -1,0 +1,16 @@
+On different terminals
+
+--> to spawn the world
+source devel/setup.bash
+roslaunch levelManager box_objects.launch
+
+
+
+--> to spawn the objects (unpause gazebo)
+source devel/setup.bash
+rosrun levelManager my_manager.py
+
+
+--> to perform pick and place
+source devel/setup.bash
+rosrun motion_planning motion_planning.py
