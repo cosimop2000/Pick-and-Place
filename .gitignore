@@ -4,3 +4,7 @@ logs
 .vscode
 .catkin_tools
 **/__pycache__/
+
+*.pt
+
+moveit_package/
