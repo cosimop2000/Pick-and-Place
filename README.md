@@ -64,33 +64,6 @@ source devel/setup.bash
 echo "source $PWD/devel/setup.bash" >> $HOME/.bashrc
 ```
 
-Clone and install [YoloV5](https://github.com/ultralytics/yolov5):
-```
-cd ~
-git clone https://github.com/ultralytics/yolov5
-cd yolov5
-pip3 install -r requirements.txt
-```
-### Example
-
-Launch the world
-```
-roslaunch levelManager lego_world.launch
-```
-Choose the level (from 1 to 4):
-```
-rosrun levelManager levelManager.py -l [level]
-```
-Start the kinematics process
-```
-rosrun motion_planning motion_planning.py
-```
-Start the localization process
-```
-rosrun vision vision.py -show
-```
-- `-show` : show the results of the recognition and localization process with an image
-
 ### Contributors
 
 | Name                 | Github                               |
@@ -108,7 +81,7 @@ On different terminals
 --> to spawn the world
 ```
 source devel/setup.bash
-roslaunch levelManager box_objects.launch
+roslaunch nomi_finiti demo_gazebo.launch
 ```
 
 --> to spawn the objects (unpause gazebo)

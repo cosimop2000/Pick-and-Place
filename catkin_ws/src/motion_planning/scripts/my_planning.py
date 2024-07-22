@@ -286,8 +286,8 @@ if __name__ == "__main__":
     detach_srv.wait_for_service()
 
     # Add the table to the planning scene
-    add_table_to_scene()
-    add_base_to_scene()
+    #add_table_to_scene()
+    #add_base_to_scene()
     rospy.sleep(5)  # Allow some time for the table to be added to the scene
     
     # Define the reference frame
