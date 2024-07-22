@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="robot_base">
+    <!-- Make the model static, so it does not move -->
+    <static>true</static>
+    
+    <!-- Define the link of the model -->
+    <link name="link">
+      <!-- Pose of the link -->
+      <pose>0 0 0.35 0 0 0</pose>
+
+      <!-- Define the collision geometry of the model -->
+      <collision name="surface">
+        <pose>0 0 -0.015 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.35 0.09 0.78</size> <!-- Size of the box (length, width, height) -->
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- Define the visual appearance of the model -->
+      <visual name="visual">
+        <pose>0 0 0 0 0 0</pose> <!-- Pose of the visual (relative to the link) -->
+        <geometry>
+          <box>
+            <size>0.35 0.09 0.78</size> <!-- Size of the visual box (length, width, height) -->
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Wood</name> <!-- Material name for the visual -->
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

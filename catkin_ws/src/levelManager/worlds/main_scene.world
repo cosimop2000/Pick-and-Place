@@ -37,31 +37,48 @@
     </include>
 
     <!-- Table -->
-    <model name="modern_table">
+    <!--model name="modern_table">
       <static>true</static>
       <include>
         <uri>model://modern_table</uri>
          <pose>0 -0.558 0 0 0 -3.1415926535</pose>
       </include>
+    </model-->
+
+    <!--model name="table">
+      <static>true</static>
+      <include>
+        <uri>model://table</uri>
+         <pose>0 -0.799 0 0 0 -3.1415926535</pose>
+      </include>
+    </model-->
+
+
+    <model name="person">
+      <static>true</static>
+      <include>
+        <uri>model://person_standing</uri>
+         <pose>0 -1.958 0 0 0 -3.1415926535</pose>
+      </include>
     </model>
 
       <!-- Robot Base -->
-    <model name="robot_base">
+    <!--model name="robot_base">
       <static>true</static>
       <include>
         <uri>model://robot_base</uri>
          <pose>0 0 -0.010370 0 0 0</pose>
       </include>
-    </model>
+    </model-->
 
     <!-- Kinect camera used for detection -0.58 -0.528 -0.437720 -0.50-->
-    <model name="kinect">
+    <!--model name="kinect">
       <static>true</static>
       <include>
         <uri>model://kinect</uri>
         <pose>-0.44 -0.50 1.58 1.58 1.57079 0</pose>
       </include>
-    </model>
+    </model-->
 
   </world>
 </sdf>

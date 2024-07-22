@@ -8,11 +8,13 @@
       <joint name="${prefix}robotiq_85_left_knuckle_joint">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         <!-- <hardwareInterface>EffortJointInterface</hardwareInterface> -->
+        <!--<hardwareInterface>PositionJointInterface</hardwareInterface>-->
       </joint>
       <actuator name="${prefix}robotiq_85_left_knuckle_motor">
         <mechanicalReduction>1</mechanicalReduction>
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         <!-- <hardwareInterface>EfforJointInterface</hardwareInterface> -->
+        <!--<hardwareInterface>PositionJointInterface</hardwareInterface>-->
       </actuator>
     </transmission>
     

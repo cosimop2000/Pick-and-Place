@@ -8,3 +8,8 @@ logs
 *.pt
 
 moveit_package/
+dio/
+last_hope/
+no_ee/
+speranza/
+final_package/
